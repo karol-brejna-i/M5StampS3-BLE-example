@@ -26,3 +26,9 @@ This project uses [VS Code IDE](https://code.visualstudio.com/) and [PlatformIO 
 To start, **clone the repository, open the project in VS Code**. 
 
 See [more detailed description](./docs/project-setup.md) of the project setup, if needed.
+
+## Running the project
+TBD
+
+## Testing the code
+TBD

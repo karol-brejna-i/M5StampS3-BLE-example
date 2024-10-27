@@ -1,9 +1,6 @@
 
 #include "LEDController.h"
 
-#include <Arduino.h>
-#include <FastLED.h>
-
 LEDController::LEDController() : _led_status(0) { FastLED.addLeds<WS2812, PIN_LED, GRB>(_leds, NUM_LEDS); }
 
 // Initialize the LED controller
@@ -11,28 +8,20 @@ void LEDController::begin() {}
 
 // Update the LED state
 void LEDController::update() {
-    // Update the LED color based on the current status
-    switch (_led_status) {
-        case 0:  // Off
-            _leds[0] = CRGB::Black;
-            break;
-        case 1:  // Red
-            _leds[0] = CRGB::Red;
-            break;
-        case 2:  // Green
-            _leds[0] = CRGB::Green;
-            break;
-        case 3:  // Blue
-            _leds[0] = CRGB::Blue;
-            break;
-        default:
-            _leds[0] = CRGB::Black;  // Default to off for safety
-            break;
+    // Array to map LED status to corresponding colors
+    const CRGB colors[] = {CRGB::Black, CRGB::Red, CRGB::Green, CRGB::Blue};
+
+    // Set the LED color based on the current status, defaulting to Black (off) if status is out of range
+    if (_led_status >= 0 && _led_status < sizeof(colors) / sizeof(colors[0])) {
+        _leds[0] = colors[_led_status];
+    } else {
+        _leds[0] = CRGB::Black;  // Default to off for safety
     }
 
     FastLED.show();
 }
 
+// Parses a string input to set the LED status.
 int LEDController::consumeInput(const std::string& value) {
     try {
         // Convert string to integer

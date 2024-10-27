@@ -3,7 +3,6 @@
 
 #include <BLEDevice.h>
 #include <BLEServer.h>
-#include <BLEUtils.h>
 #include "LEDController.h"  // Include the LEDController header
 
 /**

@@ -50,7 +50,7 @@ void BLEControl::MyServerCallbacks::onDisconnect(BLEServer* pServer) {
 }
 
 void BLEControl::MyCharacteristicCallbacks::onWrite(BLECharacteristic* pCharacteristic) {
-    USBSerial.println("Callback triggered");
+    USBSerial.println("onWrite triggered");
  
     std::string value = pCharacteristic->getValue();
     
