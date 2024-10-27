@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#include "BLEControl.h"
+#include "BLEController.h"
 #include "LEDController.h"
 
 
@@ -10,7 +10,7 @@
 #define CHARACTERISTIC_UUID "00005678-0000-1000-8000-00805F9B34FB"
 
 LEDController ledController;
-BLEControl bleControl(DEVICE_NAME, SERVICE_UUID, CHARACTERISTIC_UUID, ledController);
+BLEController BLEController(DEVICE_NAME, SERVICE_UUID, CHARACTERISTIC_UUID, ledController);
 
 void setup() {
     // initialize serial output for debugging
@@ -18,11 +18,11 @@ void setup() {
     USBSerial.println("BLE with StampS3 demo!");
 
     // start the BLE controller
-    bleControl.begin();
+    BLEController.begin();
 }
 
 void loop() {
-    if (bleControl.isDeviceConnected()) {
+    if (BLEController.isDeviceConnected()) {
         USBSerial.print("+");
     } else {
         USBSerial.print(".");

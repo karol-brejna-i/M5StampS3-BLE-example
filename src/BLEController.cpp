@@ -1,14 +1,14 @@
-#include "BLEControl.h"
+#include "BLEController.h"
 
-BLEControl::BLEControl(const char* deviceName, const char* serviceUUID, const char* characteristicUUID,
+BLEController::BLEController(const char* deviceName, const char* serviceUUID, const char* characteristicUUID,
                        LEDController& ledController)
     : _deviceName(deviceName),
       _serviceUUID(serviceUUID),
       _characteristicUUID(characteristicUUID),
       _ledController(ledController) {}
 
-void BLEControl::begin() {
-    USBSerial.println("blecontrol begin");
+void BLEController::begin() {
+    USBSerial.println("BLEController begin");
     // Initialize BLE
     BLEDevice::init(_deviceName);
     _pServer = BLEDevice::createServer();
@@ -40,16 +40,16 @@ void BLEControl::begin() {
     BLEDevice::startAdvertising();
 }
 
-bool BLEControl::isDeviceConnected() { return _deviceConnected; }
+bool BLEController::isDeviceConnected() { return _deviceConnected; }
 
-void BLEControl::MyServerCallbacks::onConnect(BLEServer* pServer) { _bleControl->_deviceConnected = true; }
+void BLEController::MyServerCallbacks::onConnect(BLEServer* pServer) { _bleControl->_deviceConnected = true; }
 
-void BLEControl::MyServerCallbacks::onDisconnect(BLEServer* pServer) {
+void BLEController::MyServerCallbacks::onDisconnect(BLEServer* pServer) {
     _bleControl->_deviceConnected = false;
     pServer->startAdvertising();  // restart advertising
 }
 
-void BLEControl::MyCharacteristicCallbacks::onWrite(BLECharacteristic* pCharacteristic) {
+void BLEController::MyCharacteristicCallbacks::onWrite(BLECharacteristic* pCharacteristic) {
     USBSerial.println("onWrite triggered");
  
     std::string value = pCharacteristic->getValue();
