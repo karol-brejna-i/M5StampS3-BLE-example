@@ -34,10 +34,10 @@ int LEDController::consumeInput(const std::string& value) {
 
     } catch (const std::invalid_argument& e) {
         USBSerial.println("Invalid argument in consumeInput");
-        return -1;  // Error during conversion
+        return -1;
     } catch (const std::out_of_range& e) {
         USBSerial.println("Out of range in consumeInput");
-        return -1;  // Error during conversion
+        return -1;
     }
 }
 

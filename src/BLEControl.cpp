@@ -55,8 +55,14 @@ void BLEControl::MyCharacteristicCallbacks::onWrite(BLECharacteristic* pCharacte
     std::string value = pCharacteristic->getValue();
     
     if (!value.empty()) {
-        _bleControl->_ledController.consumeInput(value);
-        _bleControl->_ledController.update();
+        int result = _bleControl->_ledController.consumeInput(value);
+        if (result > 0) {
+            _bleControl->_ledController.update();
+        } else if (result == 0) {
+            USBSerial.println("LED state not changed.");
+        } else {
+            USBSerial.println("Setting LEDstate failed.");
+        }
     } else {
         USBSerial.println("Received empty value");
     }
