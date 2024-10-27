@@ -3,9 +3,7 @@
 #include "BLEControl.h"
 #include "LEDController.h"
 
-// UUIDs for the service and characteristic
-// #define SERVICE_UUID "12345678-1234-1234-1234-123456789012"
-// #define CHARACTERISTIC_UUID "87654321-4321-4321-4321-210987654321"
+
 #define DEVICE_NAME "Bramator"
 
 #define SERVICE_UUID "00001234-0000-1000-8000-00805F9B34FB"
